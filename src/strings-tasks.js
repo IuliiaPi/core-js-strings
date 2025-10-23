@@ -196,6 +196,9 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes() => 0
  */
 function sumOfCodes(str) {
+  if (str.length === 0) {
+    return 0;
+  }
   return str.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0);
 }
 
@@ -348,14 +351,12 @@ function isPalindrome(str) {
  */
 function findLongestWord(sentence) {
   const words = sentence.split(' ');
-  const longestWord = words[0];
-
-  // for (let i = 1; i < words.length; i = +1) {
-  //   const currentWord = words[i];
-  //   if (currentWord.length > longestWord.length) {
-  //     longestWord = currentWord;
-  //   }
-  // }
+  const longestWord = words.reduce((longest, currentWord) => {
+    if (currentWord.length > longest.length) {
+      return currentWord;
+    }
+    return longest;
+  }, '');
   return longestWord;
 }
 
